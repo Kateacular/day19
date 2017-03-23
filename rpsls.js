@@ -13,3 +13,11 @@ var sget = require("sget");
 
 
 
+
+
+var exit = function(){
+	console.log("Thanks for playing! Until next time.");
+	process.exit();
+
+};
+
