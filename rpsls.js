@@ -21,3 +21,8 @@ var exit = function(){
 
 };
 
+
+var viewMenu = function(){
+
+	console.log("Checking function");
+};
