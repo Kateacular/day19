@@ -14,7 +14,8 @@ var sget = require("sget");
 var playerChoice =[];
 var computerChoice =[];
 
-var computerPlays = Math.random();
+var computerWords = ["Rock","Paper","Scissors","Lizard","Spock"];
+var computerPlays = computerWords[Math.floor(Math.random() * computerWords.length)];
 
 
 var initiatePlay = function() {
@@ -46,20 +47,38 @@ var playerPlays = sget("\nAll Hail Sam Kass!\n\nChoose an option:\n1 for Rock\n2
     console.log("Invalid option. Please try again.");
     initiatePlay();
 	}
-
 };
 
+// //math version, doesn't work well b/c of large Spock number
+// var playComputer = function() {
+// 	if (0 < computerPlays < 0.20) {
+//     computerChoice.push("Rock");
+// 	}
+// 	else if (0.21 < computerPlays < 0.40) {
+//     computerChoice.push("Paper");
+// 	} 
+// 	else if (0.41 < computerPlays < 0.60) {
+//     computerChoice.push("Scissors");
+// 	}
+// 	else if (0.61 < computerPlays < 0.80) {
+//     computerChoice.push("Lizard");
+// 	}
+// 	else {
+//     computerChoice.push("Spock");
+// 	}
+// };
+
 var playComputer = function() {
-	if (0 < computerPlays < 0.20) {
+	if (computerPlays == "Rock") {
     computerChoice.push("Rock");
 	}
-	else if (0.21 < computerPlays < 0.40) {
+	else if (computerPlays == "Paper") {
     computerChoice.push("Paper");
 	} 
-	else if (0.41 < computerPlays < 0.60) {
+	else if (computerPlays == "Scissors") {
     computerChoice.push("Scissors");
 	}
-	else if (0.61 < computerPlays < 0.80) {
+	else if (computerPlays == "Lizard") {
     computerChoice.push("Lizard");
 	}
 	else {
