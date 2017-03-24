@@ -10,12 +10,13 @@
 // **********
 
 var sget = require("sget");
+var playerName;
 
 var playerChoice =[];
 var computerChoice =[];
 
 var computerWords = ["Rock","Paper","Scissors","Lizard","Spock"];
-var computerPlays = computerWords[Math.floor(Math.random() * computerWords.length)];
+//var computerPlays = computerWords[Math.floor(Math.random() * computerWords.length)];
 
 
 var initiatePlay = function() {
@@ -49,26 +50,8 @@ var playerPlays = sget("\nAll Hail Sam Kass!\n\nChoose an option:\n1 for Rock\n2
 	}
 };
 
-// //math version, doesn't work well b/c of large Spock number
-// var playComputer = function() {
-// 	if (0 < computerPlays < 0.20) {
-//     computerChoice.push("Rock");
-// 	}
-// 	else if (0.21 < computerPlays < 0.40) {
-//     computerChoice.push("Paper");
-// 	} 
-// 	else if (0.41 < computerPlays < 0.60) {
-//     computerChoice.push("Scissors");
-// 	}
-// 	else if (0.61 < computerPlays < 0.80) {
-//     computerChoice.push("Lizard");
-// 	}
-// 	else {
-//     computerChoice.push("Spock");
-// 	}
-// };
-
 var playComputer = function() {
+	var computerPlays = computerWords[Math.floor(Math.random() * computerWords.length)];
 	if (computerPlays == "Rock") {
     computerChoice.push("Rock");
 	}
@@ -81,8 +64,12 @@ var playComputer = function() {
 	else if (computerPlays == "Lizard") {
     computerChoice.push("Lizard");
 	}
-	else {
+	else if (computerPlays == "Spock"){
     computerChoice.push("Spock");
+	}
+	else {
+	console.log ("Computer forgot how to play. Stand by.");
+	playAgain();
 	}
 };
 
@@ -94,10 +81,10 @@ var compareRock = function() {
         console.log ("Bazinga! Computer wins! Paper covers Rock.");
         }
     else if (computerChoice == "Scissors") {
-       console.log("Player wins! Rock crushes Scissors!");
+       console.log(playerName+" wins! Rock crushes Scissors!");
         }
     else if (computerChoice == "Lizard") {
-        console.log("Player wins! Rock crushes Lizard!");
+        console.log(playerName+" wins! Rock crushes Lizard!");
         }
     else if (computerChoice == "Spock"){
 		console.log ("Bazinga! Computer wins! Spock vaporizes Rock.");
@@ -114,7 +101,7 @@ var comparePaper = function() {
         console.log( "The result is a tie!");
    		}
     else if (computerChoice == "Rock") {
-        console.log ("Player wins! Paper covers Rock.");
+        console.log (playerName+" wins! Paper covers Rock.");
         }
     else if (computerChoice == "Scissors") {
        console.log("Bazinga! Computer wins! Scissors cuts Paper.");
@@ -123,7 +110,7 @@ var comparePaper = function() {
         console.log("Bazinga! Computer wins! Lizard eats Paper.");
         }
     else if (computerChoice == "Spock"){
-		console.log ("Player wins! Paper disproves Spock.");
+		console.log (playerName+" wins! Paper disproves Spock.");
     }
     else {
     	console.log ("Computer forgot how to play. Stand by.");     
@@ -141,10 +128,10 @@ var compareScissors = function() {
         console.log ("Bazinga! Computer wins! Rock smashes Scissors.");
         }
     else if (computerChoice == "Paper") {
-       console.log("Player wins! Scissors cuts Paper!");
+       console.log(playerName+" wins! Scissors cuts Paper!");
         }
     else if (computerChoice == "Lizard") {
-        console.log("Player wins! Scissors decapitates Lizard.");
+        console.log(playerName+" wins! Scissors decapitates Lizard.");
         }
     else if (computerChoice == "Spock"){
 		console.log ("Bazinga! Computer wins! Spock smashes scissors!");
@@ -165,13 +152,13 @@ var compareScissors = function() {
         console.log ("Bazinga! Computer wins! Rock crushes Lizard.");
         }
     else if (computerChoice == "Paper") {
-       console.log("Player wins! Lizard eats Paper!");
+       console.log(playerName+" wins! Lizard eats Paper!");
         }
     else if (computerChoice == "Scissors") {
         console.log("Bazinga! Computer wins! Scissors decapitates Lizard.");
         }
     else if (computerChoice == "Spock"){
-		console.log ("Player wins! Lizard poisons Spock!");
+		console.log (playerName+" wins! Lizard poisons Spock!");
     }
     else {
     	console.log ("Computer forgot how to play. Stand by.");     
@@ -185,13 +172,13 @@ var compareScissors = function() {
         console.log( "The result is both Leonard Nemoy and Zachary Quinto!");
    		}
     else if (computerChoice == "Rock") {
-        console.log ("Player wins! Spock vaporizes Rock!");
+        console.log (playerName+" wins! Spock vaporizes Rock!");
         }
     else if (computerChoice == "Paper") {
-       console.log("Player wins! Paper disproves Spock!");
+       console.log("Bazinga! Computer wins! Paper disproves Spock!");
         }
     else if (computerChoice == "Scissors") {
-        console.log("Player wins! Spock smashes Scissors!");
+        console.log(playerName+" wins! Spock smashes Scissors!");
         }
     else if (computerChoice == "Lizard"){
 		console.log ("Bazinga! Computer wins! Lizard poisons Spock!");
@@ -199,29 +186,37 @@ var compareScissors = function() {
     else {
     	console.log ("Computer forgot how to play. Stand by.");     
      }
-    console.log("You played "+playerChoice+". \nComputer played "+computerChoice+". ");
+    console.log(playerName+" played "+playerChoice+". \nComputer played "+computerChoice+". ");
     playAgain();
     };
 
 var playAgain = function(){
 	var again = sget("Play again? \n1 for yes, 2 for no.").trim();
 	if (again == 1){
-		playerChoice = [];
-		computerChoice = [];
+		playerChoice.pop();
+		computerChoice.pop();
 		run();
 	}
 	else if (again == 2){
 		exit();
 	}else {
-	 	console.log("Just 1 or 2. This is not a fancy game.");
+	 	console.log("Just 1 or 2. This is not a fancy game, "+playerName+ ". ");
 	 	playAgain();
 	}
 };
 
 
 var exit = function(){
-	console.log("Thanks for playing! Until next time.");
+	console.log("Thanks for playing, "+playerName+"! Until next time.");
 	process.exit();
+};
+
+var intro = function(){
+	console.log("\nWelcome to Rock Paper Scissors Lizard Spock");
+	playerName = sget("What is your name?").trim();
+	console.log("Hello, "+playerName+"! ");
+	console.log("Let's play! \n");
+
 };
 
 
@@ -230,7 +225,7 @@ var run = function(){
 	initiatePlay();
 };
 
-
+intro();
 run();
 
 
