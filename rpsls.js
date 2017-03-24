@@ -16,7 +16,6 @@ var playerChoice =[];
 var computerChoice =[];
 
 var computerWords = ["Rock","Paper","Scissors","Lizard","Spock"];
-//var computerPlays = computerWords[Math.floor(Math.random() * computerWords.length)];
 
 
 var initiatePlay = function() {
