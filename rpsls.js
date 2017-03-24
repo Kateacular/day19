@@ -215,7 +215,6 @@ var intro = function(){
 	playerName = sget("What is your name?").trim();
 	console.log("Hello, "+playerName+"! ");
 	console.log("Let's play! \n");
-
 };
 
 
